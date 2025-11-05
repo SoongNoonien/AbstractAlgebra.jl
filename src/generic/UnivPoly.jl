@@ -262,10 +262,7 @@ function gen(S::UniversalPolyRing{T}, i::Int) where {T}
    return UnivPoly{T}(gen(mpoly_ring(S), i), S)
 end
 
-function gens(S::UniversalPolyRing{T}) where {T}
-   n = nvars(S)
-   return UnivPoly{T}[gen(S, i) for i in 1:n]
-end
+gens(S::UniversalPolyRing{T}) where T = [UnivPoly{T}(g, S) for g in gens(mpoly_ring(S))]
 
 # HACK: we abuse the @varnames_interface macro to teach gens for UniversalPolyRing
 # some superpowers
